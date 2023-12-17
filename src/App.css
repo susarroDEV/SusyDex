@@ -1,0 +1,38 @@
+.container {
+    text-align: center;
+    display: grid;
+    gap: 10vh;
+}
+
+header {
+    grid-row: 1;
+    width: 100vw;
+    padding: 10px;
+    background-color: #16171a;
+    position: fixed;
+    min-height: 10vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: calc(10px + 2vmin);
+}
+
+header > img {
+    height: 8vmin;
+    pointer-events: none;
+}
+
+main {
+    grid-row: 2;
+    margin-top: 2.5%;
+    margin-left: 5% ;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    min-height: 90vh;
+    max-width: 90vw;
+    gap: 60px;
+}
