@@ -1,8 +1,26 @@
+import { useEffect, useState } from "react";
+
 export function Filters() {
+    const [generationFilter, setGenerationFilter] = useState("all");
+    const [typeFilter, setTypeFilter] = useState("all");
+    const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        if (event.target.name === "generations") {
+            setGenerationFilter(event.target.value);
+        } else {
+            setTypeFilter(event.target.value);
+        }
+        return ({generationFilter, typeFilter});
+    };
+    useEffect(() => {   
+        console.log(generationFilter);
+        console.log(typeFilter);
+    }, [generationFilter, typeFilter]);
+
     return (
         <section>
             <label htmlFor="generations">Generations</label>
-            <select name="generations" id="generations">
+            <select name="generations" id="generations" onChange={handleChange}>
+                <option value="all">All</option>
                 <option value="gen1">Kanto</option>
                 <option value="gen2">Johto</option>
                 <option value="gen3">Hoenn</option>
@@ -14,7 +32,8 @@ export function Filters() {
                 <option value="gen9">Paldea</option>
             </select>
             <label htmlFor="types">Types</label>
-            <select name="types" id="types">
+            <select name="types" id="types" onChange={handleChange}>
+                <option value="all">All</option>
                 <option value="bug">Bug</option>
                 <option value="dark">Dark</option>
                 <option value="dragon">Dragon</option>

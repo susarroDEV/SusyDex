@@ -4,9 +4,6 @@ import { PokemonInfo } from "../types/PokemonInfo";
 
 const END_POINT_POKEMON_API = "https://pokeapi.co/api/v2/pokemon/";
 
-
-
-
 export function useObtainPokemonInfo(pokeIndex: number): PokemonInfo[] {
     const [pokemonInfo, setPokemonInfo] = useState<PokemonInfo[]>([{
         name: "loading...",
@@ -26,7 +23,6 @@ export function useObtainPokemonInfo(pokeIndex: number): PokemonInfo[] {
                     type2: data.types.length > 1 ? data.types[1].type.name : ""
                 }]);
             });
-
     }, []);
 
     return pokemonInfo;
