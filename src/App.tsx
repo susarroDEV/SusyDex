@@ -1,15 +1,19 @@
-import { PokemonCardList } from "./components/PokemonCardList";
+import { PokemonCard } from "./components/PokemonCard";
 import { Filters} from "./components/Filters";
 import { Header } from "./components/Header";
+
+import { FilterProvider } from "./context/filters";
 
 import "./App.css";
 
 export function App() {
     return (
-        <div className="container">
-            <Header/>
-            <Filters/>
-            <PokemonCardList/>
-        </div>
+        <FilterProvider>
+            <div className='container'>
+                <Header/>
+                <Filters/>
+                <PokemonCard />
+            </div>
+        </FilterProvider>
     );
 }

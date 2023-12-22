@@ -2,6 +2,7 @@
     text-align: center;
     display: grid;
     grid-template-rows: 10vh 5vh 90vh;
+    gap: 10px;
 }
 
 header {
@@ -16,6 +17,7 @@ header {
     align-items: center;
     justify-content: flex-start;
     font-size: calc(10px + 2vmin);
+
 }
 
 header > img {
@@ -24,20 +26,13 @@ header > img {
 }
 
 section {
-    margin-top: 2.5vh;
     grid-row: 2;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: right;
-    max-width: 90vw;
-    gap: 30px;
+    transform: scale(calc(10px + 2vmin));
 }
 
 main {
-    grid-row: 3;
     margin-top: 2.5vh;
+    grid-row: 3;
     margin-left: 5% ;
     display: flex;
     flex-direction: row;

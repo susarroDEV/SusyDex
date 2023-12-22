@@ -1,0 +1,25 @@
+.pkf-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    max-width: 90vw;
+    margin-left: 5vw;    
+    gap: 60px;
+}
+
+.pkf-select {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #16171a;
+    background-color: #16171a;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+option:hover {
+    border-bottom: #cb4747;
+}
