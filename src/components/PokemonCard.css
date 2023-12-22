@@ -11,6 +11,16 @@
     text-align: center;
 }
 
+.pkc-number {
+    position: absolute;
+    transform: translate(75px, -100px);
+    border-bottom: 1px solid rgb(255, 255, 255);
+    color: rgb(255, 255, 255);
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
 .pkc-main-type-BUG:hover {
     box-shadow: 0px 0px 10px 0px rgba(168, 184, 32, 0.75);
     border-color: rgb(168, 184, 32);
