@@ -13,7 +13,8 @@ export function useFilterPokemon(): PokemonInfo[] {
     const filterPokemonList = (pokemonList : PokemonInfo[]) => {
         return pokemonList.filter((pokemon) => {
             if (filters) {
-                return (pokemon.type1 === filters.filters.type || pokemon.type2 === filters.filters.type || filters.filters.type === "all") &&
+                return (pokemon.name.toLowerCase().includes(filters.filters.name?.toLowerCase() || '') || filters.filters.name === "") && 
+                    (pokemon.type1 === filters.filters.type || pokemon.type2 === filters.filters.type || filters.filters.type === "all") &&
                     (pokemon.generation === filters.filters.generation || filters.filters.generation === "all") &&
                     (pokemon.eggGroup1 === filters.filters.eggGroup || pokemon.eggGroup2 === filters.filters.eggGroup || filters.filters.eggGroup === "all") &&
                     (pokemon.rarity === filters.filters.rarity || filters.filters.rarity === "all") &&

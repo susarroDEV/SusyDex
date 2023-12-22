@@ -3,17 +3,85 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 200px;
-    height: 200px;
+    width: 250px;
+    height: 250px;
     background-color: rgb(29, 29, 29);
-    border-radius: 25px;
+    border-radius: 15px;
     box-shadow: 0px 0px 10px 0px rgba(8, 8, 8, 0.75);
     text-align: center;
 }
 
-.pkc-container:hover {
-    box-shadow: 0px 0px 10px 0px rgb(255, 13, 0);
-    border-color:rgb(255, 13, 0);
+.pkc-main-type-BUG:hover {
+    box-shadow: 0px 0px 10px 0px rgba(168, 184, 32, 0.75);
+    border-color: rgb(168, 184, 32);
+}
+.pkc-main-type-DARK:hover {
+    box-shadow: 0px 0px 10px 0px rgba(112, 88, 72, 0.75);
+    border-color: rgb(112, 88, 72);
+}
+.pkc-main-type-DRAGON:hover {
+    box-shadow: 0px 0px 10px 0px rgba(112, 56, 248, 0.75);
+    border-color: rgb(112, 56, 248);
+}
+.pkc-main-type-ELECTRIC:hover {
+    box-shadow: 0px 0px 10px 0px rgba(248, 208, 48, 0.75);
+    border-color: rgb(248, 208, 48);
+}
+.pkc-main-type-FAIRY:hover {
+    box-shadow: 0px 0px 10px 0px rgba(238, 153, 172, 0.75);
+    border-color: rgb(238, 153, 172);
+}
+.pkc-main-type-FIGHTING:hover {
+    box-shadow: 0px 0px 10px 0px rgba(192, 48, 40, 0.75);
+    border-color: rgb(192, 48, 40);
+}
+.pkc-main-type-FIRE:hover {
+    box-shadow: 0px 0px 10px 0px rgba(240, 128, 48, 0.75);
+    border-color: rgb(240, 128, 48);
+}
+.pkc-main-type-FLYING:hover {
+    box-shadow: 0px 0px 10px 0px rgba(168, 144, 240, 0.75);
+    border-color: rgb(168, 144, 240);
+}
+.pkc-main-type-GHOST:hover {
+    box-shadow: 0px 0px 10px 0px rgba(112, 88, 152, 0.75);
+    border-color: rgb(112, 88, 152);
+}
+.pkc-main-type-GRASS:hover {
+    box-shadow: 0px 0px 10px 0px rgba(120, 200, 80, 0.75);
+    border-color: rgb(120, 200, 80);
+}
+.pkc-main-type-GROUND:hover {
+    box-shadow: 0px 0px 10px 0px rgba(224, 192, 104, 0.75);
+    border-color: rgb(224, 192, 104);
+}
+.pkc-main-type-ICE:hover {
+    box-shadow: 0px 0px 10px 0px rgba(152, 216, 216, 0.75);
+    border-color: rgb(152, 216, 216);
+}
+.pkc-main-type-NORMAL:hover {
+    box-shadow: 0px 0px 10px 0px rgba(168, 168, 120, 0.75);
+    border-color: rgb(168, 168, 120);
+}
+.pkc-main-type-POISON:hover {
+    box-shadow: 0px 0px 10px 0px rgba(160, 64, 160, 0.75);
+    border-color: rgb(160, 64, 160);
+}
+.pkc-main-type-PSYCHIC:hover {
+    box-shadow: 0px 0px 10px 0px rgba(248, 88, 136, 0.75);
+    border-color: rgb(248, 88, 136);
+}
+.pkc-main-type-ROCK:hover {
+    box-shadow: 0px 0px 10px 0px rgba(184, 160, 56, 0.75);
+    border-color: rgb(184, 160, 56);
+}
+.pkc-main-type-STEEL:hover {
+    box-shadow: 0px 0px 10px 0px rgba(184, 184, 208, 0.75);
+    border-color: rgb(184, 184, 208);
+}
+.pkc-main-type-WATER:hover {
+    box-shadow: 0px 0px 10px 0px rgba(104, 144, 240, 0.75);
+    border-color: rgb(104, 144, 240);
 }
 
 .pkc-types {

@@ -15,7 +15,7 @@ header {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between;
     font-size: calc(10px + 2vmin);
 
 }
@@ -27,7 +27,7 @@ header > img {
 
 section {
     grid-row: 2;
-    transform: scale(calc(10px + 2vmin));
+    display: block;    
 }
 
 main {
@@ -42,4 +42,27 @@ main {
     min-height: 90vh;
     max-width: 90vw;
     gap: 60px;
+}
+
+
+@media (max-width: 1100px) {
+    main {
+        margin-top: 125px;
+    }
+}
+
+@media (max-width: 700px) {
+    main {
+        margin-top: 200px;
+    }
+}
+@media (max-width: 470px) {
+    main {
+        margin-top: 250px;
+    }
+}
+@media (max-width: 400px) {
+    main {
+        margin-top: 325px;
+    }
 }

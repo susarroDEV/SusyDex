@@ -1,0 +1,26 @@
+.pkh-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pkh-logo > img{
+    height: 8vmin;
+    pointer-events: none;
+}
+
+.pkh-search {
+    margin-right: 5vw;
+    border: none;
+    outline: none;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #fff;
+    background-color: transparent;
+    border-bottom: 1px solid #fff;
+    transition: border-bottom 0.3s ease-in-out;
+}
+
+.pkh-search:focus {
+    border-bottom: 1px solid #ff0000;
+}
