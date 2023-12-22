@@ -2,6 +2,7 @@ import { createContext, useState } from "react";
 import { PokemonFilter } from "../types/PokemonFilter";
 
 export const FilterContext = createContext<{filters: PokemonFilter, setFilters: React.Dispatch<React.SetStateAction<PokemonFilter>>} | undefined>({filters: {
+    name: "",
     generation: "all",
     type: "all",
     eggGroup: "all",
@@ -12,6 +13,7 @@ export const FilterContext = createContext<{filters: PokemonFilter, setFilters: 
 
 export function FilterProvider  ({ children }: { children: React.ReactNode }) {
     const [filters, setFilters] : [filters: PokemonFilter, setFilters: React.Dispatch<React.SetStateAction<PokemonFilter>>] = useState({
+        name: "",
         generation: "all",
         type: "all",
         eggGroup: "all",
