@@ -17,6 +17,38 @@ export function Filters() {
         })
     }
 
+    const handleClear = () => {
+            setFilters({
+                name: "",
+                generation: "all",
+                type: "all",
+                eggGroup: "all",
+                rarity: "all",
+                height: 200,
+                weight: 9999,
+                isShiny: false
+            });
+
+            const generationSelect = document.getElementById(generationId) as HTMLSelectElement;
+            generationSelect.value = "all";
+
+            const typeSelect = document.getElementById(typesId) as HTMLSelectElement;
+            typeSelect.value = "all";
+
+            const eggGroupSelect = document.getElementById(eggGroupId) as HTMLSelectElement;
+            eggGroupSelect.value = "all";
+
+            const raritySelect = document.getElementById(rarityId) as HTMLSelectElement;
+            raritySelect.value = "all";
+        }
+    
+    const handleShiny = () => {
+        setFilters({
+            ...filters,
+            isShiny: !filters.isShiny
+        })
+    }
+
     return (
         <section className="pkf-container">
             <div className="pkf-select-container">
@@ -102,6 +134,14 @@ export function Filters() {
                     <input  type="range" name="weight" id={weightId} min={0} max={9999} onChange={handleChange} />
                     <span> {`· ${filters.weight/10} kg`} </span>
                 </div>
+            </div>
+            <div className="pkf-button-container">
+                <button onClick={handleShiny}>
+                    <img src="../assets/ShinyIcon.png" alt="An image representing Shiny Icon" style={filters.isShiny? {backgroundColor: "#1d1d1d ", filter: "invert(0)"} :{backgroundColor: "transparent"} } />
+                </button>
+                <button onClick={handleClear}>
+                    <img src="../assets/ClearFilter.png" alt="An image of clearing filters" />
+                </button>
             </div>
         </section>
     );

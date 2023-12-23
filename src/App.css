@@ -44,6 +44,11 @@ main {
     gap: 60px;
 }
 
+@media (max-width: 1500px) {
+    main {
+        margin-top: 120px;
+    }
+}
 
 @media (max-width: 1100px) {
     main {
@@ -61,8 +66,13 @@ main {
         margin-top: 250px;
     }
 }
+@media (max-width: 440px) {
+    main {
+        margin-top: 300px;
+    }
+}
 @media (max-width: 400px) {
     main {
-        margin-top: 325px;
+        margin-top: 400px;
     }
 }

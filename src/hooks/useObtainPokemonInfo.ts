@@ -23,6 +23,7 @@ export function useObtainPokemonInfo(pokeIndices: number[]): PokemonInfo[] {
                             id: pokemonData.id,
                             name: pokemonData.name,
                             sprite: pokemonData.sprites.front_default,
+                            shinySprite: pokemonData.sprites.front_shiny,
                             type1: pokemonData.types[0].type.name,
                             type2: pokemonData.types.length > 1 ? pokemonData.types[1].type.name : "",
                             height: pokemonData.height,

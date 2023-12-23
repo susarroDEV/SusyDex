@@ -33,7 +33,28 @@ option:hover {
     border-bottom: #cb4747;
 }
 
-@media (max-width: 1100px) {
+button {
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: transparent;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+button > img {
+    padding: 5px;
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    border-radius: 10px;
+    filter: brightness(0) invert(1);
+
+}
+
+@media (max-width: 1500px) {
         .pkf-container {
             margin-top: 50px;
             flex-direction: row;

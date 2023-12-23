@@ -6,4 +6,5 @@ export type PokemonFilter = {
     rarity: string
     height: number
     weight: number
+    isShiny: boolean
 };
