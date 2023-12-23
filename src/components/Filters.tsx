@@ -8,12 +8,43 @@ import "./Filters.css";
 
 export function Filters() {
     const {filters, setFilters} = useContext(FilterContext) as {filters: PokemonFilter, setFilters: React.Dispatch<React.SetStateAction<PokemonFilter>>}
-    const [generationId, typesId, eggGroupId, rarityId, heightId, weightId] = [useId(), useId(), useId(), useId(), useId(), useId()]
+    const [generationId, typesId, eggGroupId, rarityId, heightId, minHeightId, maxHeightId, weightId, minWeightId, maxWeightId] = [useId(), useId(), useId(), useId(), useId(), useId(), useId(), useId(), useId(), useId(), useId()];
 
     const handleChange = (event: React.ChangeEvent<HTMLSelectElement> | React.ChangeEvent<HTMLInputElement>) => {
         setFilters({
             ...filters,
             [event.target.name]: event.target.value
+        })
+        if (event.target.name === "minHeight" && Number(event.target.value) > filters.maxHeight) {
+            setFilters({
+                ...filters,
+                minHeight: filters.maxHeight
+            })
+        }
+        if (event.target.name === "maxHeight" && Number(event.target.value) < filters.minHeight) {
+            setFilters({
+                ...filters,
+                maxHeight: filters.minHeight
+            })
+        }
+        if (event.target.name === "minWeight" && Number(event.target.value) > filters.maxWeight) {
+            setFilters({
+                ...filters,
+                minWeight: filters.maxWeight
+            })
+        }
+        if (event.target.name === "maxWeight" && Number(event.target.value) < filters.minWeight) {
+            setFilters({
+                ...filters,
+                maxWeight: filters.minWeight
+            })
+        }
+    }
+
+    const handleShiny = () => {
+        setFilters({
+            ...filters,
+            isShiny: !filters.isShiny
         })
     }
 
@@ -24,36 +55,20 @@ export function Filters() {
                 type: "all",
                 eggGroup: "all",
                 rarity: "all",
-                height: 200,
-                weight: 9999,
+                minHeight: 0,
+                maxHeight: 200,
+                minWeight: 0,
+                maxWeight: 9999,
                 isShiny: false
             });
-
-            const generationSelect = document.getElementById(generationId) as HTMLSelectElement;
-            generationSelect.value = "all";
-
-            const typeSelect = document.getElementById(typesId) as HTMLSelectElement;
-            typeSelect.value = "all";
-
-            const eggGroupSelect = document.getElementById(eggGroupId) as HTMLSelectElement;
-            eggGroupSelect.value = "all";
-
-            const raritySelect = document.getElementById(rarityId) as HTMLSelectElement;
-            raritySelect.value = "all";
         }
     
-    const handleShiny = () => {
-        setFilters({
-            ...filters,
-            isShiny: !filters.isShiny
-        })
-    }
 
     return (
         <section className="pkf-container">
             <div className="pkf-select-container">
                 <label htmlFor={generationId}>Generations</label>
-                <select className="pkf-select pkf-generations" name="generation" id={generationId} onChange={handleChange}>
+                <select className="pkf-select pkf-generations" value={filters.generation} name="generation" id={generationId} onChange={handleChange}>
                     <option value="all">All</option>
                     <option value="generation-i">Kanto</option>
                     <option value="generation-ii">Johto</option>
@@ -68,7 +83,7 @@ export function Filters() {
             </div>
             <div className="pkf-select-container">
                 <label htmlFor={typesId}>Types</label>
-                <select className="pkf-select pkf-types" name="type" id={typesId} onChange={handleChange}>
+                <select className="pkf-select pkf-types" value={filters.type} name="type" id={typesId} onChange={handleChange}>
                     <option value="all">All</option>
                     <option value="bug">Bug</option>
                     <option value="dark">Dark</option>
@@ -92,7 +107,7 @@ export function Filters() {
             </div>
             <div className="pkf-select-container">
                 <label htmlFor={eggGroupId}>Egg Group</label>
-                <select className="pkf-select pkf-egg-groups" name="eggGroup" id={eggGroupId} onChange={handleChange}>
+                <select className="pkf-select pkf-egg-groups" value={filters.eggGroup} name="eggGroup" id={eggGroupId} onChange={handleChange}>
                     <option value="all">All</option>
                     <option value="monster">Monster</option>
                     <option value="water1">Water 1</option>
@@ -115,7 +130,7 @@ export function Filters() {
             </div>
             <div className="pkf-select-container">
                 <label htmlFor={rarityId}>Rarity</label>
-                <select className="pkf-select pkf-rarity" name="rarity" id={rarityId} onChange={handleChange}>
+                <select className="pkf-select pkf-rarity" value={filters.rarity} name="rarity" id={rarityId} onChange={handleChange}>
                     <option value="all">All</option>
                     <option value="common">Common</option>
                     <option value="baby">Baby</option>
@@ -123,18 +138,23 @@ export function Filters() {
                     <option value="legendary">Legendary</option>                            
                 </select>
             </div>
-            <div className="pkf-range-container">
                 <div className="pkf-height">
-                    <label htmlFor={heightId}>Max. Height</label>
-                    <input type="range" name="height" id={heightId} min={0} max={200} onChange={handleChange} />
-                    <span> {`· ${filters.height*10} cm`} </span>
+                    <label htmlFor={heightId}>Height</label>
+                    <div id={heightId} className="pkf-range-container-height">
+                        <input className="pkf-range-min-height" type="range" name="minHeight" value={filters.minHeight} id={maxHeightId} min={0} max={200} onChange={handleChange} />
+                        <input className="pkf-range-max-height" type="range" name="maxHeight" value={filters.maxHeight} id={minHeightId} min={0} max={200} onChange={handleChange} />
+                    </div>
+                    <span>{`${filters.minHeight/10}  -  ${filters.maxHeight/10}m`}</span>
+                    
                 </div>
                 <div className="pkf-weight">
-                    <label htmlFor={weightId}>Max. Weight</label>
-                    <input  type="range" name="weight" id={weightId} min={0} max={9999} onChange={handleChange} />
-                    <span> {`· ${filters.weight/10} kg`} </span>
+                    <label htmlFor={weightId}>Weight</label>
+                    <div id={weightId} className="pkf-range-container-weight">
+                        <input className="pkf-range-min-weight" type="range" name="minWeight" value={filters.minWeight} id={maxWeightId} min={0} max={9999} onChange={handleChange} />
+                        <input className="pkf-range-max-weight" type="range" name="maxWeight" value={filters.maxWeight} id={minWeightId} min={0} max={9999} onChange={handleChange} />
+                    </div>
+                    <span>{`${filters.minWeight/10}  -  ${filters.maxWeight/10}kg`}</span>
                 </div>
-            </div>
             <div className="pkf-button-container">
                 <button onClick={handleShiny}>
                     <img src="../assets/ShinyIcon.png" alt="An image representing Shiny Icon" style={filters.isShiny? {backgroundColor: "#1d1d1d ", filter: "invert(0)"} :{backgroundColor: "transparent"} } />

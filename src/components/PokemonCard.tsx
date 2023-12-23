@@ -8,8 +8,6 @@ export function PokemonCard() {
     const isShiny = useContext(FilterContext)?.filters.isShiny as boolean;
     const filteredPokemonList = useFilterPokemon();
 
-
-
     if (filteredPokemonList.length === 0) {
         return (
             <main>

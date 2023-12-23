@@ -4,7 +4,9 @@ export type PokemonFilter = {
     type: string
     eggGroup: string
     rarity: string
-    height: number
-    weight: number
+    minHeight: number
+    maxHeight: number
+    minWeight: number
+    maxWeight: number
     isShiny: boolean
 };

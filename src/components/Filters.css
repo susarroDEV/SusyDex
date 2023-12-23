@@ -5,17 +5,6 @@
     justify-content: center;
     gap: 25px;
     font-size: calc(10px + 0.75vmin);
-
-}
-.pkf-select-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 25px;
-    font-size: calc(10px + 0.75vmin);
-
-
 }
 
 .pkf-select {
@@ -31,6 +20,75 @@
 
 option:hover {
     border-bottom: #cb4747;
+}
+
+.pkf-height, .pkf-weight {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 200px;
+    gap: 10px;
+    margin-right: 20px;
+}
+.pkf-range-container-height, .pkf-range-container-weight {
+    position: relative;
+    height: 50px;
+    min-height: 50px;
+    margin-top: 45px;
+}
+
+.pkf-range-min-height, .pkf-range-min-weight {
+    height: 0;
+    z-index: 1;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    pointer-events: all;
+    width: 15px;
+    height: 15px;
+    background-color: #be3838;
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px #000000;
+    cursor: pointer;
+}
+
+input[type=range]::-moz-range-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    pointer-events: all;
+    width: 10px;
+    height: 10px;
+    background-color: #be3838;
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px #fdc2c2;
+    cursor: pointer;  
+}
+
+input[type=range]::-webkit-slider-thumb:hover {
+    background: #be3838;
+}
+
+input[type=range]::-webkit-slider-thumb:active {
+    box-shadow: inset 0 0 3px #be3838, 0 0 9px #be3838;
+    -webkit-box-shadow: inset 0 0 3px #000000, 0 0 9px #000000;
+}
+
+input[type="range"] {
+    -webkit-appearance: none; 
+    appearance: none;
+    height: 5px;
+    width: 150px;
+    position: absolute;
+    background-color: #ff000038;
+    pointer-events: none;
+}
+
+span {
+    position: relative;
+    top: 25px;
+    width: 400px;
+    text-wrap: nowrap;
 }
 
 button {

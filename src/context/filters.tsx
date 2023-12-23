@@ -7,8 +7,10 @@ export const FilterContext = createContext<{filters: PokemonFilter, setFilters: 
     type: "all",
     eggGroup: "all",
     rarity: "all",
-    height: 0,
-    weight: 0,
+    minHeight: 0,
+    maxHeight: 200,
+    minWeight: 0,
+    maxWeight: 9999,
     isShiny: false
 } , setFilters: () => {}});
 
@@ -19,14 +21,16 @@ export function FilterProvider  ({ children }: { children: React.ReactNode }) {
         type: "all",
         eggGroup: "all",
         rarity: "all",
-        height: 0,
-        weight: 0,
+        minHeight: 0,
+        maxHeight: 200,
+        minWeight: 0,
+        maxWeight: 9999,
         isShiny: false
     });
 
     return (
         <FilterContext.Provider value={{filters, setFilters} as {filters: PokemonFilter, setFilters: React.Dispatch<React.SetStateAction<PokemonFilter>>}}>
-                {children}
+            {children}
         </FilterContext.Provider>
     )
 }

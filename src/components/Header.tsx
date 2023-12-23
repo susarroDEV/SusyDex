@@ -9,7 +9,7 @@ export function Header() {
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setFilters({
             ...filters,
-            name: event.target.value
+            [event.target.name]: event.target.value
         });
     };
 
@@ -20,6 +20,7 @@ export function Header() {
                 <h1>SusyDex</h1>
             </div>
             <input
+                name="name"
                 className="pkh-search"
                 type="text"
                 placeholder="Pikachu, Charmander ..."
