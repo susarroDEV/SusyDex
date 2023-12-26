@@ -1,4 +1,4 @@
-export type PokemonInfo = {
+export type ListPokemonInfo = {
     id: number
     name: string
     sprite: string

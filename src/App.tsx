@@ -1,19 +1,19 @@
-import { PokemonCard } from "./components/PokemonCard";
-import { Filters} from "./components/Filters";
-import { Header } from "./components/Header";
+import { HomePage } from "./pages/HomePage";
+import { PokemonPage } from "./pages/PokemonPage";
+import  Page404  from "./pages/Page404";
+
+import { Router } from "./components/Router";
 
 import { FilterProvider } from "./context/filters";
-
-import "./App.css";
+import { Route } from "./components/Route";
 
 export function App() {
     return (
         <FilterProvider>
-            <div className='container'>
-                <Header/>
-                <Filters/>
-                <PokemonCard />
-            </div>
+            <Router defaultComponent={Page404}>
+                <Route path="/" Component={HomePage} />
+                <Route path="/pokemon/:pokemonName" Component={PokemonPage} />
+            </Router> 
         </FilterProvider>
     );
 }

@@ -20,6 +20,9 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"],
+  "eslintConfig" : {
+    "extends": "./node_moduls/standard-with-typescript/eslinttrc.json"
+  },
+  "include": ["src", "utils/const.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

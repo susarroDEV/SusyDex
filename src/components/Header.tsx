@@ -1,15 +1,17 @@
 import React, { useContext } from 'react';
 import { FilterContext } from '../context/filters';
 import { PokemonFilter } from '../types/PokemonFilter';
+import { Dispatch } from '../types/Dispatch';
 import './Header.css';
 
 export function Header() {
-    const { filters, setFilters } = useContext(FilterContext) as { filters: PokemonFilter, setFilters: React.Dispatch<React.SetStateAction<PokemonFilter>> }
+    const { state, dispatch } = useContext(FilterContext) as { state: PokemonFilter, dispatch: React.Dispatch<Dispatch> }
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setFilters({
-            ...filters,
-            [event.target.name]: event.target.value
+        dispatch({
+            type: 'SET_FILTER',
+            name: event.target.name,
+            value: event.target.value
         });
     };
 
@@ -24,7 +26,7 @@ export function Header() {
                 className="pkh-search"
                 type="text"
                 placeholder="Pikachu, Charmander ..."
-                value={filters.name}
+                value={state.name}
                 onChange={handleInputChange}
             />
         </header>

@@ -1,11 +1,9 @@
 import { useEffect, useState, useRef } from "react";
-import { PokemonInfo } from "../types/PokemonInfo";
+import { ListPokemonInfo } from "../types/ListPokemonInfo";
+import { END_POINT_POKEMON_API, END_POINT_POKEMON_SPECIES_API } from "../utils/const";
 
-const END_POINT_POKEMON_API = "https://pokeapi.co/api/v2/pokemon/";
-const END_POINT_POKEMON_SPECIES_API = "https://pokeapi.co/api/v2/pokemon-species/";
-
-export function useObtainPokemonInfo(pokeIndices: number[]): PokemonInfo[] {
-    const [pokemonData, setPokemonData] = useState<PokemonInfo[]>([]);
+export function useObtainPokemonInfo(pokeIndices: number[]): ListPokemonInfo[] {
+    const [pokemonData, setPokemonData] = useState<ListPokemonInfo[]>([]);
     const currentIndexRef = useRef(0);
 
     useEffect(() => {
@@ -19,7 +17,7 @@ export function useObtainPokemonInfo(pokeIndices: number[]): PokemonInfo[] {
                         const pokemonData = await pokemonResponse.json();
                         const pokemonSpeciesResponse = await fetch(`${END_POINT_POKEMON_SPECIES_API}${index}`);
                         const speciesData = await pokemonSpeciesResponse.json();
-                        const pokemonInfo: PokemonInfo = {
+                        const pokemonInfo: ListPokemonInfo = {
                             id: pokemonData.id,
                             name: pokemonData.name,
                             sprite: pokemonData.sprites.front_default,

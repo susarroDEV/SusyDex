@@ -1,74 +1,46 @@
 import { useContext, useId } from "react";
-
 import { PokemonFilter } from "../types/PokemonFilter";
-
 import { FilterContext } from "../context/filters";
-
+import { Dispatch } from "../types/Dispatch";
 import "./Filters.css";
 
 export function Filters() {
-    const {filters, setFilters} = useContext(FilterContext) as {filters: PokemonFilter, setFilters: React.Dispatch<React.SetStateAction<PokemonFilter>>}
+    const { state, dispatch } = useContext(FilterContext) as { state: PokemonFilter, dispatch: React.Dispatch<Dispatch> };
     const [generationId, typesId, eggGroupId, rarityId, heightId, minHeightId, maxHeightId, weightId, minWeightId, maxWeightId] = [useId(), useId(), useId(), useId(), useId(), useId(), useId(), useId(), useId(), useId(), useId()];
 
-    const handleChange = (event: React.ChangeEvent<HTMLSelectElement> | React.ChangeEvent<HTMLInputElement>) => {
-        setFilters({
-            ...filters,
-            [event.target.name]: event.target.value
-        })
-        if (event.target.name === "minHeight" && Number(event.target.value) > filters.maxHeight) {
-            setFilters({
-                ...filters,
-                minHeight: filters.maxHeight
-            })
-        }
-        if (event.target.name === "maxHeight" && Number(event.target.value) < filters.minHeight) {
-            setFilters({
-                ...filters,
-                maxHeight: filters.minHeight
-            })
-        }
-        if (event.target.name === "minWeight" && Number(event.target.value) > filters.maxWeight) {
-            setFilters({
-                ...filters,
-                minWeight: filters.maxWeight
-            })
-        }
-        if (event.target.name === "maxWeight" && Number(event.target.value) < filters.minWeight) {
-            setFilters({
-                ...filters,
-                maxWeight: filters.minWeight
-            })
-        }
+    const controlSlider = (event: React.ChangeEvent<HTMLInputElement>) => {
+        dispatch({
+            type: 'SLIDER_CONTROL',
+            name: event.target.name,
+            value: event.target.value
+        });
     }
+
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+        dispatch({
+            type: 'SET_FILTER',
+            name: event.target.name,
+            value: event.target.value
+        });
+    };
 
     const handleShiny = () => {
-        setFilters({
-            ...filters,
-            isShiny: !filters.isShiny
-        })
-    }
+        dispatch({
+            type: 'SET_SHINY'
+        });
+    };
 
     const handleClear = () => {
-            setFilters({
-                name: "",
-                generation: "all",
-                type: "all",
-                eggGroup: "all",
-                rarity: "all",
-                minHeight: 0,
-                maxHeight: 200,
-                minWeight: 0,
-                maxWeight: 9999,
-                isShiny: false
-            });
-        }
-    
+        dispatch({
+            type: 'CLEAR_FILTERS'
+        });
+    };
 
     return (
         <section className="pkf-container">
             <div className="pkf-select-container">
                 <label htmlFor={generationId}>Generations</label>
-                <select className="pkf-select pkf-generations" value={filters.generation} name="generation" id={generationId} onChange={handleChange}>
+                <select className="pkf-select pkf-generations" value={state.generation} name="generation" id={generationId} onChange={handleChange}>
                     <option value="all">All</option>
                     <option value="generation-i">Kanto</option>
                     <option value="generation-ii">Johto</option>
@@ -83,7 +55,7 @@ export function Filters() {
             </div>
             <div className="pkf-select-container">
                 <label htmlFor={typesId}>Types</label>
-                <select className="pkf-select pkf-types" value={filters.type} name="type" id={typesId} onChange={handleChange}>
+                <select className="pkf-select pkf-types" value={state.type} name="type" id={typesId} onChange={handleChange}>
                     <option value="all">All</option>
                     <option value="bug">Bug</option>
                     <option value="dark">Dark</option>
@@ -107,7 +79,7 @@ export function Filters() {
             </div>
             <div className="pkf-select-container">
                 <label htmlFor={eggGroupId}>Egg Group</label>
-                <select className="pkf-select pkf-egg-groups" value={filters.eggGroup} name="eggGroup" id={eggGroupId} onChange={handleChange}>
+                <select className="pkf-select pkf-egg-groups" value={state.eggGroup} name="eggGroup" id={eggGroupId} onChange={handleChange}>
                     <option value="all">All</option>
                     <option value="monster">Monster</option>
                     <option value="water1">Water 1</option>
@@ -130,7 +102,7 @@ export function Filters() {
             </div>
             <div className="pkf-select-container">
                 <label htmlFor={rarityId}>Rarity</label>
-                <select className="pkf-select pkf-rarity" value={filters.rarity} name="rarity" id={rarityId} onChange={handleChange}>
+                <select className="pkf-select pkf-rarity" value={state.rarity} name="rarity" id={rarityId} onChange={handleChange}>
                     <option value="all">All</option>
                     <option value="common">Common</option>
                     <option value="baby">Baby</option>
@@ -141,23 +113,23 @@ export function Filters() {
                 <div className="pkf-height">
                     <label htmlFor={heightId}>Height</label>
                     <div id={heightId} className="pkf-range-container-height">
-                        <input className="pkf-range-min-height" type="range" name="minHeight" value={filters.minHeight} id={maxHeightId} min={0} max={200} onChange={handleChange} />
-                        <input className="pkf-range-max-height" type="range" name="maxHeight" value={filters.maxHeight} id={minHeightId} min={0} max={200} onChange={handleChange} />
+                        <input className="pkf-range-max-height" type="range" name="maxHeight" value={state.maxHeight} id={minHeightId} min={0} max={200} onChange={controlSlider} />
+                        <input className="pkf-range-min-height" type="range" name="minHeight" value={state.minHeight} id={maxHeightId} min={0} max={200} onChange={controlSlider} />
                     </div>
-                    <span>{`${filters.minHeight/10}  -  ${filters.maxHeight/10}m`}</span>
+                    <span>{`${state.minHeight/10}  -  ${state.maxHeight/10}m`}</span>
                     
                 </div>
                 <div className="pkf-weight">
                     <label htmlFor={weightId}>Weight</label>
                     <div id={weightId} className="pkf-range-container-weight">
-                        <input className="pkf-range-min-weight" type="range" name="minWeight" value={filters.minWeight} id={maxWeightId} min={0} max={9999} onChange={handleChange} />
-                        <input className="pkf-range-max-weight" type="range" name="maxWeight" value={filters.maxWeight} id={minWeightId} min={0} max={9999} onChange={handleChange} />
+                        <input className="pkf-range-min-weight" type="range" name="minWeight" value={state.minWeight} id={maxWeightId} min={0} max={9999} onChange={controlSlider} />
+                        <input className="pkf-range-max-weight" type="range" name="maxWeight" value={state.maxWeight} id={minWeightId} min={0} max={9999} onChange={controlSlider} />
                     </div>
-                    <span>{`${filters.minWeight/10}  -  ${filters.maxWeight/10}kg`}</span>
+                    <span>{`${state.minWeight/10}  -  ${state.maxWeight/10}kg`}</span>
                 </div>
             <div className="pkf-button-container">
                 <button onClick={handleShiny}>
-                    <img src="../assets/ShinyIcon.png" alt="An image representing Shiny Icon" style={filters.isShiny? {backgroundColor: "#1d1d1d ", filter: "invert(0)"} :{backgroundColor: "transparent"} } />
+                    <img src="../assets/ShinyIcon.png" alt="An image representing Shiny Icon" style={state.isShiny? {backgroundColor: "#1d1d1d ", filter: "invert(0)"} :{backgroundColor: "transparent"} } />
                 </button>
                 <button onClick={handleClear}>
                     <img src="../assets/ClearFilter.png" alt="An image of clearing filters" />
