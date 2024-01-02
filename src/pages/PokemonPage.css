@@ -1,0 +1,273 @@
+.pki-logo {
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  display: flex;
+}
+
+.pki-logo > img{
+  transform: scale(1.5);
+  pointer-events: none;
+  height: 8vmin;
+}
+
+.pki-container {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: 1fr 1fr 1fr 3fr;
+  width: 50%;
+  height: 75vh;
+  background-color: #1d1d1d;
+  border-radius: 15px;
+  box-shadow: 0px 0px 10px 0px rgba(8, 8, 8, 0.75);
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+  gap: 40px;
+  border: 10px solid rgb(0, 0, 0);
+  margin: 3% 25%;
+}
+
+.pki-container > h1 {
+  margin: 10%;
+  grid-row: 1;
+  grid-column: 2;
+  border-bottom: 2px solid rgb(255, 255, 255);
+
+}
+
+.pki-img-container {
+  grid-row: 1 / 4;
+  grid-column: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background-color: #0e0e0e;
+  margin: 10% 0% 10% 10%;
+  border-radius: 15px;
+  box-shadow: 0px 0px 10px 0px rgba(8, 8, 8, 0.75);
+  border: 7px solid rgb(0, 0, 0);
+  transition: all 0.75s linear;
+}
+
+.pki-img-container-3D-active {
+  transform: rotateY(360deg);
+}
+
+
+.pki-img-container > img {
+  position: absolute;
+}
+
+.pki-img-container-shiny-active{
+  animation: shinyEffect 0.5s ease-in-out 1;
+}
+
+@keyframes shinyEffect {
+  0% {
+    filter: brightness(10);
+  }
+  50% {
+    filter: brightness(1.5);
+  }
+  100% {
+    filter: none;
+  }
+  
+}
+
+.pki-img-disabled {
+  display: none;
+} 
+
+.pki-img-button-container {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+
+.pki-img-button-container > button {
+  margin: 10px;
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+  background-color: #0e0e0e;
+  border: none;
+  color: rgb(255, 255, 255);
+  font-size: 16px;
+  cursor: pointer;
+  position: absolute;
+}
+
+.pki-img-button-shiny {
+  top: 3vw;
+  left: 1vw;
+}
+
+.pki-img-button-shiny > img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50px;
+  border: 3px solid rgb(0, 0, 0);
+  filter: brightness(0) invert(1);
+  padding: 5px;
+}
+
+.pki-img-button-container-shiny-active > img {
+  background-color: #b8b8b844;
+}
+
+.pki-img-button-model3D {
+  top: 3vw;
+  right: 1vw;
+  font-family: 'Monaspace Krypton', monospace;
+  font-weight: 900;
+}
+
+.pki-img-button-model3D > p {
+  width: 40px;
+  height: 40px;
+  border-radius: 50px;
+  border: 3px solid rgb(0, 0, 0);
+  filter: brightness(0) invert(1);
+  padding: 7px;
+}
+
+.pki-description {
+  grid-row: 2;
+  grid-column: 2;
+  width: 100%;
+  text-wrap: wrap;
+  width: 80%;
+  margin-left: 10%;
+}
+
+.pki-characteristics {
+  grid-row: 3;
+  grid-column:2;
+}
+
+
+.pki-stats {
+  grid-row: 4;
+  grid-column: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: space-around;; 
+  margin-left: 15%;
+  margin: 10% 0% 10% 10%;
+  border-radius: 15px;
+  padding: 20px 20px;
+  width: 100%;
+}
+
+.pki-stats > h2 {
+  text-align: center;
+  border-bottom: 2px solid rgb(255, 255, 255);
+  margin-bottom: 10px;
+}
+
+.pki-stat-container {
+  width: 15vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  place-content: flex-start;
+}
+
+.pki-stat-container > h3 {
+  width: 0px;
+  border-right: #0e0e0e 2px solid;
+  text-wrap: nowrap;
+}
+
+.pki-stat-container > p {
+  margin-left: 5vw;
+  width: 10vw;
+  padding: 5px;
+  text-align: right;
+  border-radius: 5px;
+  border: #0e0e0e 2px solid;
+
+}
+
+.pki-stat-container > span {
+  width: 0px;
+}
+
+
+.pki-types {
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  gap: 10px;
+  font-size: 12px;
+  display: flex;
+}
+
+.pki-types > h2 {
+  border-radius: 5px;
+  padding: 2px 8px;
+  color: rgb(255, 255, 255);
+}
+
+.pki-type-BUG {
+  background-color: rgb(168, 184, 32);
+}
+.pki-type-DARK {
+  background-color: rgb(112, 88, 72);
+}
+.pki-type-DRAGON {
+  background-color: rgb(112, 56, 248);
+}
+.pki-type-ELECTRIC {
+  background-color: rgb(248, 208, 48);
+}
+.pki-type-FAIRY {
+  background-color: rgb(238, 153, 172);
+}
+.pki-type-FIGHTING {
+  background-color: rgb(192, 48, 40);
+}
+.pki-type-FIRE {
+  background-color: rgb(240, 128, 48);
+}
+.pki-type-FLYING {
+  background-color: rgb(168, 144, 240);
+}
+.pki-type-GHOST {
+  background-color: rgb(112, 88, 152);
+}
+.pki-type-GRASS {
+  background-color: rgb(120, 200, 80);
+}
+.pki-type-GROUND {
+  background-color: rgb(224, 192, 104);
+}
+.pki-type-ICE {
+  background-color: rgb(152, 216, 216);
+}
+.pki-type-NORMAL {
+  background-color: rgb(168, 168, 120);
+}
+.pki-type-POISON {
+  background-color: rgb(160, 64, 160);
+}
+.pki-type-PSYCHIC {
+  background-color: rgb(248, 88, 136);
+}
+.pki-type-ROCK {
+  background-color: rgb(184, 160, 56);
+}
+.pki-type-STEEL {
+  background-color: rgb(184, 184, 208);
+}
+.pki-type-WATER {
+  background-color: rgb(104, 144, 240);
+}

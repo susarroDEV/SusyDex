@@ -1,42 +1,42 @@
-import { useContext, useId } from "react";
-import { PokemonFilter } from "../types/PokemonFilter";
-import { FilterContext } from "../context/filters";
-import { Dispatch } from "../types/Dispatch";
-import "./Filters.css";
+import { useContext, useId } from 'react'
+import { type PokemonFilter } from '../types/PokemonFilter'
+import { FilterContext } from '../context/filters'
+import { type Dispatch } from '../types/Dispatch'
+import './Filters.css'
 
-export function Filters() {
-    const { state, dispatch } = useContext(FilterContext) as { state: PokemonFilter, dispatch: React.Dispatch<Dispatch> };
-    const [generationId, typesId, eggGroupId, rarityId, heightId, minHeightId, maxHeightId, weightId, minWeightId, maxWeightId] = [useId(), useId(), useId(), useId(), useId(), useId(), useId(), useId(), useId(), useId(), useId()];
+export function Filters () {
+  const { state, dispatch } = useContext(FilterContext) as { state: PokemonFilter, dispatch: React.Dispatch<Dispatch> }
+  const [generationId, typesId, eggGroupId, rarityId, formId, heightId, minHeightId, maxHeightId, weightId, minWeightId, maxWeightId] = [useId(), useId(), useId(), useId(), useId(), useId(), useId(), useId(), useId(), useId(), useId(), useId()]
 
-    const controlSlider = (event: React.ChangeEvent<HTMLInputElement>) => {
-        dispatch({
-            type: 'SLIDER_CONTROL',
-            name: event.target.name,
-            value: event.target.value
-        });
-    }
+  const controlSlider = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch({
+      type: 'SLIDER_CONTROL',
+      name: event.target.name,
+      value: event.target.value
+    })
+  }
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-        dispatch({
-            type: 'SET_FILTER',
-            name: event.target.name,
-            value: event.target.value
-        });
-    };
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    dispatch({
+      type: 'SET_FILTER',
+      name: event.target.name,
+      value: event.target.value
+    })
+  }
 
-    const handleShiny = () => {
-        dispatch({
-            type: 'SET_SHINY'
-        });
-    };
+  const handleShiny = () => {
+    dispatch({
+      type: 'SET_SHINY'
+    })
+  }
 
-    const handleClear = () => {
-        dispatch({
-            type: 'CLEAR_FILTERS'
-        });
-    };
+  const handleClear = () => {
+    dispatch({
+      type: 'CLEAR_FILTERS'
+    })
+  }
 
-    return (
+  return (
         <section className="pkf-container">
             <div className="pkf-select-container">
                 <label htmlFor={generationId}>Generations</label>
@@ -96,9 +96,8 @@ export function Filters() {
                     <option value="ditto">Ditto</option>
                     <option value="dragon">Dragon</option>
                     <option value="no-eggs">No Eggs</option>
-                    <option value="undiscovered">Undiscovered</option>                                
+                    <option value="undiscovered">Undiscovered</option>
                 </select>
-
             </div>
             <div className="pkf-select-container">
                 <label htmlFor={rarityId}>Rarity</label>
@@ -107,34 +106,53 @@ export function Filters() {
                     <option value="common">Common</option>
                     <option value="baby">Baby</option>
                     <option value="mythical">Mythical</option>
-                    <option value="legendary">Legendary</option>                            
+                    <option value="legendary">Legendary</option>
+                </select>
+            </div>
+            <div className="pkf-select-container">
+                <label htmlFor={formId}>Form</label>
+                <select className="pkf-select pkf-forms" value={state.form} name="form" id={formId} onChange={handleChange}>
+                    <option value="all">All</option>
+                    <option value="alolan">Alolan</option>
+                    <option value="galarian">Galarian</option>
+                    <option value="hisuian">Hisuian</option>
+                    <option value="paldean">Paldean</option>
+                    <option value="mega">Mega</option>
+                    <option value="gmax">Gigamax</option>
+                    <option value="other">Other</option>
+                    <option value="none">None</option>
                 </select>
             </div>
                 <div className="pkf-height">
-                    <label htmlFor={heightId}>Height</label>
+                    <label htmlFor={heightId}>Height (m*10)</label>
                     <div id={heightId} className="pkf-range-container-height">
                         <input className="pkf-range-max-height" type="range" name="maxHeight" value={state.maxHeight} id={minHeightId} min={0} max={200} onChange={controlSlider} />
                         <input className="pkf-range-min-height" type="range" name="minHeight" value={state.minHeight} id={maxHeightId} min={0} max={200} onChange={controlSlider} />
                     </div>
-                    <span>{`${state.minHeight/10}  -  ${state.maxHeight/10}m`}</span>
-                    
-                </div>
+                      <span>
+                        <input id={heightId} type="number" name="minHeight" value={state.minHeight} min={0} max={9999} onChange={handleChange}/>
+                        <input type="number" name="maxHeight" value={state.maxHeight} min={0} max={200} onChange={handleChange}/>
+                      </span>
+                    </div>
                 <div className="pkf-weight">
-                    <label htmlFor={weightId}>Weight</label>
+                    <label htmlFor={weightId}>Weight (kg*10)</label>
                     <div id={weightId} className="pkf-range-container-weight">
                         <input className="pkf-range-min-weight" type="range" name="minWeight" value={state.minWeight} id={maxWeightId} min={0} max={9999} onChange={controlSlider} />
                         <input className="pkf-range-max-weight" type="range" name="maxWeight" value={state.maxWeight} id={minWeightId} min={0} max={9999} onChange={controlSlider} />
                     </div>
-                    <span>{`${state.minWeight/10}  -  ${state.maxWeight/10}kg`}</span>
+                    <span>
+                      <input id={weightId} type="number" name="minWeight" value={state.minWeight} min={0} max={9999} onChange={handleChange}/>
+                      <input type="number" name="maxWeight" value={state.maxWeight} min={0} max={9999} onChange={handleChange}/>
+                    </span>
                 </div>
             <div className="pkf-button-container">
                 <button onClick={handleShiny}>
-                    <img src="../assets/ShinyIcon.png" alt="An image representing Shiny Icon" style={state.isShiny? {backgroundColor: "#1d1d1d ", filter: "invert(0)"} :{backgroundColor: "transparent"} } />
+                    <img src="../assets/ShinyIcon.png" alt="An image of a Shiny Icon" className={state.isShiny ? 'shiny-icon-active' : 'shiny-icon-inactive'} />
                 </button>
                 <button onClick={handleClear}>
                     <img src="../assets/ClearFilter.png" alt="An image of clearing filters" />
                 </button>
             </div>
         </section>
-    );
+  )
 }

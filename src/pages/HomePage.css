@@ -1,83 +1,57 @@
 .container {
-    text-align: center;
-    display: grid;
-    grid-template-rows: 10vh 5vh 90vh;
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: center;
 }
 
 header {
-    grid-row: 1;
-    width: 100vw;
-    padding: 10px;
-    background-color: #16171a;
-    position: fixed;
-    min-height: 10vh;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    font-size: calc(10px + 2vmin);
-    z-index: 2;
+  width: 100vw;
+  padding: 10px;
+  background-color: #16171a;
+  position: fixed;
+  min-height: 10vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  font-size: calc(10px + 2vmin);
+  z-index: 2;
 }
 
 header > img {
-    height: 8vmin;
-    pointer-events: none;
+  pointer-events: none;
+  height: 8vmin;
 }
 
-section {
-    grid-row: 2;
-    display: block;    
+.pkf-container {
+  margin-top: 12vh;
+  display: flex;
+  scale: 0.8;
 }
 
 main {
-    margin-top: 2.5vh;
-    grid-row: 3;
-    margin-left: 5% ;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    min-height: 90vh;
-    max-width: 90vw;
-    gap: 60px;
+  margin-left: 5% ;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  min-height: 90vh;
+  max-width: 90vw;
+  gap: 60px;
+  margin-top: 2.5vh;
 }
 
-@media (max-width: 1500px) {
-    main {
-        margin-top: 200px;
-    }
+footer {
+  width: 100%;
+  padding: 40px;
+  background-color: #16171a;
+  min-height: 30vh;
+  font-size: calc(10px + 2vmin);
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  color: white;
 }
-
-@media (max-width: 800px) {
-    main {
-        margin-top: 250px;
-    }
-}
-@media (max-width: 610px) {
-    main {
-        margin-top: 310px;
-    }
-}
-@media (max-width: 440px) {
-    main {
-        margin-top: 330px;
-    }
-}
-@media (max-width: 415px) {
-    main {
-        margin-top: 400px;
-    }
-}
-@media (max-width: 364px) {
-    main {
-        margin-top: 500px;
-    }
-}
-@media (max-width: 345px) {
-    main {
-        margin-top: 560px;
-    }
-}
-

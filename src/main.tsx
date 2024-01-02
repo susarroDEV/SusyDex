@@ -1,14 +1,14 @@
-import ReactDOM from 'react-dom/client';
+import ReactDOM from 'react-dom/client'
 
-import { FilterProvider } from './context/filters';
-import { App } from './App';
+import { FilterProvider } from './context/filters'
+import { App } from './App'
 
-import './main.css';
+import './main.css'
 
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+const root = ReactDOM.createRoot(document.getElementById('root') ?? document.createElement('div'))
 
 root.render(
     <FilterProvider>
         <App />
     </FilterProvider>
-);
+)

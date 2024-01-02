@@ -1,34 +1,34 @@
-import React, { useContext } from 'react';
-import { FilterContext } from '../context/filters';
-import { PokemonFilter } from '../types/PokemonFilter';
-import { Dispatch } from '../types/Dispatch';
-import './Header.css';
+import React, { useContext } from 'react'
+import { FilterContext } from '../context/filters'
+import { type PokemonFilter } from '../types/PokemonFilter'
+import { type Dispatch } from '../types/Dispatch'
+import './Header.css'
 
-export function Header() {
-    const { state, dispatch } = useContext(FilterContext) as { state: PokemonFilter, dispatch: React.Dispatch<Dispatch> }
+export function Header () {
+  const { state, dispatch } = useContext(FilterContext) as { state: PokemonFilter, dispatch: React.Dispatch<Dispatch> }
 
-    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        dispatch({
-            type: 'SET_FILTER',
-            name: event.target.name,
-            value: event.target.value
-        });
-    };
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch({
+      type: 'SET_FILTER',
+      name: event.target.name,
+      value: event.target.value
+    })
+  }
 
-    return (
+  return (
         <header>
             <div className="pkh-logo">
-                <img src="../assets/Pokeball.png" alt="A Pokeball image" />
+                <img src="../../assets/LogoDex.png" alt="A Pokeball image" />
                 <h1>SusyDex</h1>
             </div>
             <input
                 name="name"
                 className="pkh-search"
                 type="text"
-                placeholder="Pikachu, Charmander ..."
+                placeholder="Search by name..."
                 value={state.name}
                 onChange={handleInputChange}
             />
         </header>
-    );
+  )
 }

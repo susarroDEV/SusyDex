@@ -1,27 +1,27 @@
-import './Pokedex.css';
+import { Link } from 'react-router-dom'
 
-import { FilterContext } from '../context/filters';
-import { useFilterPokemon } from '../hooks/useFilterPokemon';
-import { useContext } from 'react';
-import { PokemonFilter } from '../types/PokemonFilter';
-import { Link } from './Link';
+import './Pokedex.css'
+import { FilterContext } from '../context/filters'
+import { useFilterPokemon } from '../hooks/useFilterPokemon'
+import { useContext } from 'react'
+import { type PokemonFilter } from '../types/PokemonFilter'
 
-export function Pokedex() {
-    const { state } = useContext(FilterContext) as { state: PokemonFilter };
-    const filteredPokemonList = useFilterPokemon();
+export function Pokedex () {
+  const { state } = useContext(FilterContext) as { state: PokemonFilter }
+  const filteredPokemonList = useFilterPokemon()
 
-    if (filteredPokemonList.length === 0) {
-        return (
+  if (filteredPokemonList.length === 0) {
+    return (
             <main>
                 <h1>No Pokemon Found</h1>
                 <img src="../assets/EmptyPokeball.png" alt="An image of an empty pokeball" width={100}/>
             </main>
-        );
-    }
-    else return (
+    )
+  } else {
+    return (
         <main>
             {filteredPokemonList.map(pokemon => {
-                return (
+              return (
                     <Link to={`pokemon/${pokemon.name}`} target='_self' key={pokemon.id}>
                         <div className={`pkc-container pkc-main-type-${pokemon.type1.toUpperCase()}`} >
                             <strong className='pkc-number'>{`#${pokemon.id}`}</strong>
@@ -32,9 +32,10 @@ export function Pokedex() {
                                 {pokemon.type2 && <h2 className={`pkc-type-${pokemon.type2?.toUpperCase()}`}>{pokemon.type2?.toUpperCase()}</h2>}
                             </div>
                         </div>
-                    </Link>    
-                );
+                    </Link>
+              )
             })}
         </main>
-    );
+    )
+  }
 }
