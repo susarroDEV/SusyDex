@@ -1,6 +1,7 @@
 export interface ListPokemonInfo {
   id: number
   name: string
+  displayName: string
   sprite: string
   shinySprite: string
   type1: string
@@ -17,6 +18,8 @@ export interface ListPokemonInfo {
     hisuian: boolean
     paldean: boolean
     mega: boolean
+    megaX: boolean
+    megaY: boolean
     gmax: boolean
     other: boolean
   }

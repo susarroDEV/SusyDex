@@ -2,11 +2,15 @@ import { useObtainSinglePokemonInfo } from '../hooks/useObtainSinglePokemonInfo'
 import { useParams } from 'react-router-dom'
 import { useState } from 'react'
 import { LoadingScreen } from '../components/LoadingScreen'
+import { Footer } from '../components/Footer'
+
 import './PokemonPage.css'
+import { useObtainSingleVariationInfo } from '../hooks/useObtainSingleVariationInfo'
 
 export function PokemonPage () {
   const { pokemonName = '' } = useParams()
   const pokemonInfo = useObtainSinglePokemonInfo(pokemonName)
+  const variationInfo = useObtainSingleVariationInfo(pokemonName)
   const [renderCharacteristics, setRenderCharacteristics] = useState({
     isShiny: false,
     is3D: false
@@ -38,7 +42,7 @@ export function PokemonPage () {
                     </div>
                 </header>
                 <section className='pki-container'>
-                    <h1>{pokemonInfo.name.toUpperCase()} - #{pokemonInfo.id}</h1>
+                    <h1>{pokemonInfo.displayName.toUpperCase()} - #{pokemonInfo.id}</h1>
                     <article className={`pki-img-container  ${renderCharacteristics.is3D ? 'pki-img-container-3D-active' : ''}`}>
                         <img src={pokemonInfo.sprite} alt={`The Sprite of ${pokemonInfo.name}`} className={(!renderCharacteristics.isShiny && !renderCharacteristics.is3D) ? '' : 'pki-img-disabled'} style={{ width: '10vw' }}/>
                         <img src={pokemonInfo.shinySprite} alt={`The Shiny Sprite of ${pokemonInfo.name}`} className={(renderCharacteristics.isShiny && !renderCharacteristics.is3D) ? 'pki-img-container-shiny-active' : 'pki-img-disabled'} style={{ width: '10vw' }}/>
@@ -49,7 +53,7 @@ export function PokemonPage () {
                               <img src="../../assets/ShinyIcon.png" alt="" />
                             </button>}
                             {pokemonInfo.model3D && <button onClick={handle3D} className={`pki-img-button-model3D ${renderCharacteristics.isShiny ? 'pki-img-button-container-model3D-active' : ''}`}>
-                              {renderCharacteristics.is3D ? <p>3D</p> : <p>2D</p>}
+                              {renderCharacteristics.is3D ? <p>2D</p> : <p>3D</p>}
                             </button>
                             }
                         </div>
@@ -62,6 +66,10 @@ export function PokemonPage () {
                     </article>
                     <article className='pki-description'>
                       <p>{pokemonInfo.description.replace('\f', ' ')}</p>
+                      <span>
+                        <br />
+                        <a href={`https://www.wikidex.net/wiki/${pokemonInfo.displayName}`} target='_blank' rel="noreferrer">More information</a>
+                      </span>
                     </article>
                     <article className='pki-stats'>
                       <h2>STATS</h2>
@@ -90,7 +98,27 @@ export function PokemonPage () {
                         <p className={`pki-type-${pokemonInfo.type1.toUpperCase()}`} style={{ width: `${((pokemonInfo.stats.speed / 180) * 15)}vw` }}/><span>{pokemonInfo.stats.speed}</span>
                       </div>
                     </article>
+                    <article>
+                      <div className='pki-variations-container'>
+                        {variationInfo.forms.length > 0 ? <h2>VARIATIONS</h2> : <h2>NO VARIATIONS</h2>}
+                        <div className='pki-variations'>
+                          {variationInfo.forms.map((variation, index) => {
+                            return (
+                              <div key={index} className={`pki-variation-container pki-variation-main-type-${variation.type1.toUpperCase()}`}>
+                                <img className='pki-variation-sprite' src={variation.sprite} alt={`The Sprite of ${variation.name}`} />
+                                <h1 className='pki-variation-name'>{variation.name.charAt(0).toUpperCase() + variation.name.slice(1)}</h1>
+                                <div className ='pki-types'>
+                                  <h2 className={`pki-type-${variation.type1.toUpperCase()}`}>{variation.type1.toUpperCase()}</h2>
+                                  {variation.type2 && <h2 className={`pkc-type-${variation.type2?.toUpperCase()}`}>{variation.type2?.toUpperCase()}</h2>}
+                                </div>
+                              </div>
+                            )
+                          })}
+                        </div>
+                      </div>
+                    </article>
                 </section>
+                <Footer/>
             </div>
     )
   }

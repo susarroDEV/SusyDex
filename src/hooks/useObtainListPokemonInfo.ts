@@ -20,6 +20,7 @@ export function useObtainPokemonInfo (pokeIndices: number[]): ListPokemonInfo[] 
             const pokemonInfo: ListPokemonInfo = {
               id: pokemonData.id,
               name: pokemonData.name,
+              displayName: speciesData.names.find((name: { language: { name: string }, name: string }) => name.language.name === 'en')?.name,
               sprite: pokemonData.sprites.front_default,
               shinySprite: pokemonData.sprites.front_shiny,
               type1: pokemonData.types[0].type.name,
@@ -36,8 +37,10 @@ export function useObtainPokemonInfo (pokeIndices: number[]): ListPokemonInfo[] 
                 hisuian: speciesData.varieties.some((variety: Variety) => variety.pokemon.name.includes('hisui')),
                 paldean: speciesData.varieties.some((variety: Variety) => variety.pokemon.name.includes('paldea')),
                 mega: speciesData.varieties.some((variety: Variety) => variety.pokemon.name.includes('mega')),
+                megaX: speciesData.varieties.some((variety: Variety) => variety.pokemon.name.includes('mega-x')),
+                megaY: speciesData.varieties.some((variety: Variety) => variety.pokemon.name.includes('mega-y')),
                 gmax: speciesData.varieties.some((variety: Variety) => variety.pokemon.name.includes('gmax')),
-                other: pokemonData.forms.length > 1
+                other: pokemonData.forms.length > 1 || (speciesData.varieties.length > 1 && (speciesData.generation.name === 'generation-viii' || speciesData.generation.name === 'generation-ix'))
               }
             }
             return pokemonInfo

@@ -13,7 +13,7 @@ export function useFilterPokemon (): ListPokemonInfo[] {
 
   const filterPokemonList = (pokemonList: ListPokemonInfo[]): ListPokemonInfo[] => {
     return pokemonList.filter((pokemon) => {
-      return (pokemon.name.toLowerCase().includes(state.name?.toLowerCase() || '') || state.name === '') &&
+      return (pokemon.displayName.toLowerCase().includes(state.name?.toLowerCase() || '') || state.name === '') &&
                 ((pokemon.shinySprite && state.isShiny) || !state.isShiny) &&
                 (pokemon.type1 === state.type || pokemon.type2 === state.type || state.type === 'all') &&
                 (pokemon.generation === state.generation || state.generation === 'all') &&

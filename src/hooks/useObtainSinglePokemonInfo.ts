@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { END_POINT_POKEMON_API, END_POINT_POKEMON_SPECIES_API } from '../utils/const'
 import { type SinglePokemonInfo } from '../types/SinglePokemonInfo'
 import { type Description } from '../types/SinglePokemonProps'
+import { type Variety } from '../types/ListPokemonProps'
 
 export function useObtainSinglePokemonInfo (pokeIndex: number | string) {
   const [pokemonData, setPokemonData] = useState<SinglePokemonInfo>()
@@ -10,12 +11,13 @@ export function useObtainSinglePokemonInfo (pokeIndex: number | string) {
     const fetchPokemonInfo = async () => {
       const pokemonResponse = await fetch(`${END_POINT_POKEMON_API}${pokeIndex}`)
       const pokemonData = await pokemonResponse.json()
-      const pokemonSpeciesResponse = await fetch(`${END_POINT_POKEMON_SPECIES_API}${pokeIndex}`)
+      const pokemonSpeciesResponse = await fetch(`${END_POINT_POKEMON_SPECIES_API}${pokemonData.id}`)
       const speciesData = await pokemonSpeciesResponse.json()
       if (pokemonData && speciesData) {
         const pokemonInfo: SinglePokemonInfo = {
           id: pokemonData.id,
           name: pokemonData.name,
+          displayName: speciesData.names.find((name: { language: { name: string }, name: string }) => name.language.name === 'en')?.name,
           sprite: pokemonData.sprites.front_default,
           shinySprite: pokemonData.sprites.front_shiny,
           type1: pokemonData.types[0].type.name,
@@ -36,6 +38,17 @@ export function useObtainSinglePokemonInfo (pokeIndex: number | string) {
             specialAttack: pokemonData.stats[3]?.base_stat,
             specialDefense: pokemonData.stats[4]?.base_stat,
             speed: pokemonData.stats[5]?.base_stat
+          },
+          forms: {
+            alolan: speciesData.varieties.find((variety: Variety) => variety.pokemon.name.includes('alola'))?.name,
+            galarian: speciesData.varieties.find((variety: Variety) => variety.pokemon.name.includes('galar'))?.name,
+            hisuian: speciesData.varieties.find((variety: Variety) => variety.pokemon.name.includes('hisui'))?.name,
+            paldean: speciesData.varieties.find((variety: Variety) => variety.pokemon.name.includes('paldea'))?.name,
+            mega: speciesData.varieties.find((variety: Variety) => variety.pokemon.name.includes('mega'))?.name,
+            megaX: speciesData.varieties.find((variety: Variety) => variety.pokemon.name.includes('mega-x'))?.name,
+            megaY: speciesData.varieties.find((variety: Variety) => variety.pokemon.name.includes('mega-y'))?.name,
+            gmax: speciesData.varieties.find((variety: Variety) => variety.pokemon.name.includes('gmax'))?.name,
+            other: pokemonData.forms.length > 1
           }
         }
         setPokemonData(pokemonInfo)
@@ -43,6 +56,5 @@ export function useObtainSinglePokemonInfo (pokeIndex: number | string) {
     }
     void fetchPokemonInfo()
   }, [pokeIndex])
-
   return pokemonData
 }
